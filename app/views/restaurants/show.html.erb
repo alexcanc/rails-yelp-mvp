@@ -1,0 +1,22 @@
+<h1><%= @restaurant.name %></h1>
+<p><%= @restaurant.address %></p>
+<p><%= @restaurant.phone_number %></p>
+<p><%= @restaurant.category %></p>
+
+<h3>Reviews:</h3>
+<% @restaurant.reviews.each do |review| %>
+  <div>
+    <strong>Rating:</strong> <%= review.rating %> / 5
+    <p><%= review.content %></p>
+    <%= link_to 'Edit Review', edit_review_path(review) %>
+    <%= link_to 'Delete Review', review_path(review), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
+  </div>
+<% end %>
+
+<%= link_to 'Add a Review', new_restaurant_review_path(@restaurant), class: 'btn btn-primary' %>
+
+<!-- Add Edit and Delete options for Restaurant -->
+<%= link_to 'Edit Restaurant', edit_restaurant_path(@restaurant), class: 'btn btn-secondary' %>
+<%= link_to 'Delete Restaurant', restaurant_path(@restaurant), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+
+<%= link_to 'Back to All Restaurants', restaurants_path, class: 'btn btn-secondary' %>
